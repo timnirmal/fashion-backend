@@ -79,6 +79,4 @@ pip-delete-this-directory.txt
 # Node
 node_modules/
 
-# Cursor workspace metadata
-.cursor/
 
