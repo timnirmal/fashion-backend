@@ -1,0 +1,55 @@
+{
+  "data": {
+    "train_rows": 709,
+    "val_rows": 101,
+    "test_rows": 203,
+    "num_users": 30,
+    "num_items": 25,
+    "half_life_days": 28
+  },
+  "params": {
+    "als": {
+      "factors": 64,
+      "reg": 0.05,
+      "alpha": 20.0,
+      "iterations": 20
+    },
+    "bpr": {
+      "factors": 64,
+      "reg": 0.001,
+      "learning_rate": 0.05,
+      "epochs": 50
+    },
+    "tfidf": {
+      "max_features": 50000,
+      "min_df": 2,
+      "ngram_range": [
+        1,
+        2
+      ]
+    },
+    "hashing": {
+      "n_features": 262144
+    },
+    "blend_grid": [
+      [
+        0.3,
+        0.7,
+        0.1
+      ],
+      [
+        0.5,
+        0.5,
+        0.1
+      ],
+      [
+        0.7,
+        0.3,
+        0.1
+      ]
+    ],
+    "ltr": {
+      "enabled": false
+    }
+  }
+}

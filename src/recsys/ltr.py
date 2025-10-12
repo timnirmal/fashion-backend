@@ -1,6 +1,9 @@
 from typing import Dict, List, Tuple
 import numpy as np
-import xgboost as xgb
+try:
+    import xgboost as xgb
+except Exception:
+    xgb = None
 
 
 def build_feature_matrix(
@@ -40,6 +43,8 @@ def build_feature_matrix(
 
 
 def train_xgb_ranker(X: np.ndarray, y: np.ndarray, qid: List[int]):
+    if xgb is None:
+        raise ImportError("xgboost is unavailable; skipping LTR training")
     group = qid
     model = xgb.XGBRanker(
         objective="rank:ndcg",

@@ -93,7 +93,10 @@ def recommend_by_profile(user_profiles: Dict[str, np.ndarray], item_matrix: spar
                     scores[idx] = -1e9
                 except ValueError:
                     pass
-        top = np.argpartition(scores, -N)[-N:]
+        k = min(N, len(scores))
+        if k <= 0:
+            continue
+        top = np.argpartition(scores, -k)[-k:]
         top = top[np.argsort(scores[top])[::-1]]
         recs[u] = [item_ids[i] for i in top]
     return recs
@@ -115,7 +118,10 @@ def recommend_with_scores(user_profiles: Dict[str, np.ndarray], item_matrix: spa
                     scores[idx] = -1e9
                 except ValueError:
                     pass
-        top = np.argpartition(scores, -N)[-N:]
+        k = min(N, len(scores))
+        if k <= 0:
+            continue
+        top = np.argpartition(scores, -k)[-k:]
         top = top[np.argsort(scores[top])[::-1]]
         recs[u] = {item_ids[i]: float(scores[i]) for i in top}
     return recs

@@ -28,7 +28,11 @@ def blend_scores(cf_scores: Dict[str, Dict[str, float]], cb_scores: Dict[str, Di
         cf_n = zscore(np.nan_to_num(cf_vec, nan=np.nanmean(cf_vec)))
         cb_n = zscore(np.nan_to_num(cb_vec, nan=np.nanmean(cb_vec)))
         final = w_cf * cf_n + w_cb * cb_n + w_pop * pop_vec
-        top = np.argpartition(final, -top_k)[-top_k:]
+        k = min(top_k, len(final))
+        if k <= 0:
+            out[u] = []
+            continue
+        top = np.argpartition(final, -k)[-k:]
         top = top[np.argsort(final[top])[::-1]]
         out[u] = [items[i] for i in top]
     return out
